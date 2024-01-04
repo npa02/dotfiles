@@ -139,27 +139,3 @@ export EDITOR="$VISUAL"
 if [ -x /usr/bin/bat ]; then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
-
-# ROS - Robotic Operating System
-if [ -d /opt/ros ]; then
-    if [ -d /opt/ros/noetic ]; then
-        source /opt/ros/noetic/setup.bash
-    elif [ -d /opt/ros/foxy ]; then
-        source /opt/ros/foxy/setup.bash
-        export ROS_DOMAIN_ID=14
-        export ROBOTNAME=duken72
-        export ROS_PARTICIPANT_ID=27
-
-        if [ -f /usr/share/colcon_cd/function/colcon_cd.sh ]; then
-            source /usr/share/colcon_cd/function/colcon_cd.sh
-        fi
-        export _colcon_cd_root=/opt/ros/foxy/
-        if [ -f /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash ]; then
-            source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
-        fi
-    fi
-fi
-
-
-# Mujoco
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/duken72/.mujoco/mujoco210/bin:/usr/lib/nvidia

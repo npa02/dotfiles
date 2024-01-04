@@ -1,5 +1,4 @@
 export OS=$(echo $(grep -v _ID /etc/os-release | grep ID=) | cut -d'=' -f 2)
-export FCI_IP=172.16.0.2
 
 # Overwrite existing commands for better defaults
 # enable color support for ls and grep
@@ -75,8 +74,6 @@ alias  .5='cd ../../../../..'
 alias   dfs='c ~/dotfiles'
 alias   pkg='c ~/dotfiles/pkg'
 alias  docs='c ~/Documents'
-alias books='c ~/Documents/books'
-alias    pd='c ~/Documents/personal-docs'
 alias  down='c ~/Downloads'
 alias music='c ~/Music'
 alias  pics='c ~/Pictures'
@@ -117,20 +114,6 @@ function dps {    # dotfiles push
 # -------------------------------------------------------- #
 # OS SPECIFIC
 
-# OSD
-[[ $OS = 'osd' ]] && alias vc='osd-vpn-connect'
-
-# Ubuntu
-if [ $OS = 'ubuntu' ]; then
-    # apt - Advance Package Tool
-    alias     ai='sudo apt -y install'
-    alias  aptud='sudo apt update'
-    alias  aptug='sudo apt dist-upgrade'
-    alias aptudg='aptud && time aptug'
-    # dist-upgrade will install & remove packages as necessary to resolve dependencies
-    alias     fd='fdfind'
-fi
-
 # Arch Linux
 if [ $OS = 'arch' ]; then
     # pacman - Package Manager
@@ -159,12 +142,6 @@ if [ $OS = 'arch' ]; then
     alias  cache_show='find ~/.cache/ -type f -atime +72'
     alias cache_clean='find ~/.cache/ -type f -atime +72 -delete'
 fi
-
-# DUAL BOOT with WINDOWS
-# WIN=/media/${USERNAME}/Windows
-# alias unmountw='sudo umount ${WIN}'
-# alias   mountw='unmountw; sudo mount.ntfs-3g /dev/nvme0n1p3 ${WIN}'
-
 
 # -------------------------------------------------------- #
 # Applications specific
@@ -213,9 +190,6 @@ function jl {
 # convert a file to pdf, at least work with pptx
 alias pdfConvert='soffice --headless --convert-to pdf'
 
-# Latex
-alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
-
 # Others
 alias ra='ranger'
 alias clock='tty-clock -sc -C 1 -f %A,%d-%b-%Y'
@@ -226,13 +200,6 @@ alias vnkey='echo "Switch with Alt+Shift+K" && ibus-daemon'
 alias weather='curl wttr.in Berlin'
 alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
 alias myip='dig +short txt ch whoami.cloudflare @1.0.0.1'
-function diet {
-    cd ~/Documents && clear
-    gawk -v dow=$(date +%A) '$2 == dow {$1=$7=""; print}' diet2.md 
-    # cat diet.md
-}
-alias gtd='o ~/WS/learningNotes/notes/images/workflow-diagram-gtd.png'
-alias ssh-ubuntu='ssh -p 2222 duken72@localhost'
 
 # Alsa mixer
 alias usound='amixer -q -D pulse sset Master 14%+'
@@ -266,133 +233,6 @@ function gaps {
     gaa; gcis "$1"; gps
 }
 
-# Docker
-alias   dp='docker pull'
-alias   dt='docker tag'
-alias   di='docker images'
-alias drmi='docker rmi'
-alias dcon='docker ps'
-alias  dca='docker ps -a'
-alias  drm='docker rm'
-alias dros='docker run -it --rm --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" osrf/ros:humble-desktop'
-
-# Steam
-function steamid {
-    find ~/.local/share/Steam/steamapps/ -maxdepth 1 -type f -name '*.acf' -exec awk -F '"' '/"appid|name/{ printf $4 "|" } END { print "" }' {} \; | column -t -s '|' | sort -k 2 | grep -i "$1"
-    echo "prime-run steam steam://rungameid/[steamid]"
-}
-
-# Nvidia
-alias nvidia-smi='clear; nvidia-smi'
-
 # -------------------------------------------------------- #
-# Workspaces
-# on GitHub
-alias    ws='c ~/WS'
-alias   cfd='c ~/WS/codingForDummies && gst'
-alias    cv='c ~/WS/Curriculum-Vitae-Latex'
-alias notes='c ~/WS/learningNotes'
-alias   nov='c ~/WS/learningNotes && v'
-alias   nol='c ~/WS/notesLatex'
-alias    nn='c ~/WS/neural-network-test && v'
-alias  ccom='c ~/WS/coding-competitions && v'
-alias   aoc='c ~/WS/Advent-of-Code/AoC-2023'
-alias    cs='c ~/WS/codingForDummies/cppFD/CS'
-alias   phd='c ~/WS/phd-rbo'
-alias   mdl='c ~/WS/phd-rbo/experiments/MDL-2020'
-alias   grl='c ~/WS/test/goalRL-test'
-
-alias    td='c ~/WS/TODO'
-
-alias    gh='c ~/WS/parroplots && act'
-
-# ROS
-if [[ "$SHELL" == "/usr/bin/zsh" ]]; then
-    alias ract='source devel/setup.zsh'
-elif [[ "$SHELL" == "/usr/bin/bash" ]]; then
-    alias ract='source devel/setup.bash'
-fi
-alias r2ws='cd ~/WS/ros2_ws     && ract && cd src'
-alias  rws='cd ~/WS/ros_ws      && ract && cd src'
-alias  cws='cd ~/WS/catkin_ws   && ract && cd src'
-alias  dws='cd ~/WS/duc_ws      && ract && cd src'
-
-# TUB
-alias tm='nasd && nasp && ws'
-function tum {
-    for DIR in ~/WS/nas*; do
-        if mountpoint -q "$DIR"; then
-            sudo umount "$DIR"
-        fi
-    done
-
-    for DIR in ~/WS/afs*; do
-        if mountpoint -q "$DIR"; then
-            sudo umount "$DIR"
-        fi
-    done
-}
-function mnas {
-    cd ~/WS
-    if mountpoint -q ~/WS/"$2"; then
-        echo "Already mounted"
-        cd ~/WS/"$2"
-    else
-        STR=$(networkctl status)
-        IP_LAB="130.149.238"
-        if [[ "$STR" == *"$IP_LAB"* ]]; then
-            echo "Already in the lab network"
-        else
-            echo "NOT in the lab network, connect via VPN ..."
-            sudo openconnect -v -u duken72 --authgroup 2-TU-Full-Tunnel vpn.tu-berlin.de
-        fi
-        sudo mount -t nfs -o rw,noatime,nodiratime,async storage.robotics.tu-berlin.de:/volume1/data/"$1" ~/WS/"$2" && cd ~/WS/"$2"
-    fi
-}
-function mafs {
-    cd ~/WS
-    if mountpoint -q ~/WS/"$2"; then
-        echo "Already mounted"
-        cd ~/WS/"$2"
-    else
-        echo "Mounting directory ..."
-        sshfs duken72@sshgate.tu-berlin.de:/afs/tu-berlin.de/units/Fak_IV/robotics/"$1" ~/WS/"$2" && cd ~/WS/"$2"
-    fi
-}
-alias  nas='mnas "" nas'
-alias nasd='mnas duc nasd'
-alias nasp='mnas parrobots nasp'
-alias  afs='mafs RBO afs'
-alias afsd='mafs Staff/Duc afsd'
-alias afst='mafs RBO/Teaching/Courses/robotics afst'
-
-# Guide For Dummies
-alias    bashg='cat $(fd bashFD.bash ~)'
-alias     gitg='cat $(fd gitFD.bash ~)'
-alias     vimg='cat $(fd vimFD.bash ~)'
-alias    lessg='cat $(fd lessFD.bash ~)'
-alias     rosg='cat $(fd rosFD.bash ~)'
-alias    ros2g='cat $(fd ros2FD.bash ~)'
-alias      pyg='cat $(fd pyFD.py ~)'
-alias  dockerg='cat $(fd dockerFD.bash ~)'
-alias   bashgg='rg $(fd bashFD.bash ~) -e'
-alias    gitgg='rg $(fd gitFD.bash ~) -e'
-alias    vimgg='rg $(fd vimFD.bash ~) -e'
-alias    rosgg='rg $(fd rosFD.bash ~) -e'
-alias   ros2gg='rg $(fd ros2FD.bash ~) -e'
-alias     pygg='rg $(fd pyFD.py ~) -e'
-alias dockergg='rg $(fd dockerFD.bash ~) -e'
-
-# BORIS
-function boris {
-    session="boris"
-    tmux has-session -t $session 2>/dev/null
-    if [ $? != 0 ]; then
-        tmux new-session -d -s $session
-    fi
-    tmux send-keys -t $session "cd ~/WS/BORIS && act && python start_boris.py" C-m
-    tmux detach -s $session
-}
-
 # MOC - Music On Console
 alias mocp='mocp -O shuffle=yes -O repeat=yes'

@@ -23,11 +23,4 @@ ls | grep zst | sudo pacman -U -
 sudo aura -Akax brave-bin cli-visualizer pulseaudio-ctl siji-git \
     tty-clock-git xfce4-panel-profiles #tllocalmgr-git
 
-# Latex
-# cd ~/dotfiles/pkg
-# sudo pacman -S $(gawk -F'-' '$2 != "local" {print}' pkg_latex.txt)
-# tllocalmgr --noconfirm install $(gawk '/local/ {gsub("texlive-local-",""); print}' pkg_latex.txt)
-# texhash
-
 sudo cp ~/dotfiles/dfs/hook/*.hook /usr/share/libalpm/hooks
-
