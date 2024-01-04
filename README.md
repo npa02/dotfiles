@@ -1,30 +1,23 @@
 <!-- omit in toc -->
 # dotfiles
 
-[![tokei](https://tokei.rs/b1/github/duken72/dotfiles)](https://github.com/duken72/dotfiles)
-
 My personal dotfiles and configs.
+
+A fork of [duken72/dotfiles](https://github.com/duken72/dotfiles)
 
 <!-- omit in toc -->
 ## Table of Contents
 
-- [Screenshots](#screenshots)
-- [Packages](#packages)
-  - [Install packages and dependencies](#install-packages-and-dependencies)
-- [dotfiles and configs](#dotfiles-and-configs)
-  - [Backup existing dotfiles and configs](#backup-existing-dotfiles-and-configs)
-  - [Install dotfiles and configs](#install-dotfiles-and-configs)
-- [License](#license)
+<!-- vim-markdown-toc GFM -->
 
--------
+* [Packages](#packages)
+  * [Install packages and dependencies](#install-packages-and-dependencies)
+* [dotfiles and configs](#dotfiles-and-configs)
+  * [Backup existing dotfiles and configs](#backup-existing-dotfiles-and-configs)
+  * [Install dotfiles and configs](#install-dotfiles-and-configs)
+* [License](#license)
 
-## Screenshots
-
-For backgrounds, check [Wallpapers](Wallpapers).
-
-![screenshot](Screenshot/Screenshot_2022-01-06_21-28-44.png)
-
-![screenshot](Screenshot/Screenshot_2022-01-06_21-30-06.png)
+<!-- vim-markdown-toc -->
 
 -------
 
@@ -49,12 +42,6 @@ Some worth-mentioned names:
 - Others: cli-visualizer (audio visualizer), tty-clock-git, neofetch, lightdm-webkit-theme-osmos, etc.
 
 ### Install packages and dependencies
-
-Ubuntu:
-
-```bash
-xargs -a packages.txt -E END sudo apt-get install # for Ubuntu
-```
 
 Arch Linux:
 

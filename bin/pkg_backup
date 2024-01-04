@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PKG_DIR=/home/$USER/dotfiles/pkg
+PKG_DIR=/home/npa/dotfiles/pkg
 
 # Clear content
 > ${PKG_DIR}/pkg_pacman.txt
@@ -13,8 +13,6 @@ for PKG_GROUP in "${PKG_GROUPS[@]}"; do
 done
 
 # Backup packages
-# pacman -Qetq | grep texlive- > ${PKG_DIR}/pkg_latex.txt
-pacman -Qetq | grep python- > ${PKG_DIR}/pkg_pacman_python.txt
 pacman -Qem | grep -v texlive- > ${PKG_DIR}/pkg_aura.txt
 pacman -Qten | grep -v texlive- | grep -v python- >> ${PKG_DIR}/pkg_pacman.txt
 # Filter packages that are installed via pkg groups

@@ -8,4 +8,4 @@ Target = *
 [Action]
 Description = Backup package information
 When = PostTransaction
-Exec = /usr/local/bin/pkg_backup.sh
+Exec = /usr/local/bin/pkg_backup

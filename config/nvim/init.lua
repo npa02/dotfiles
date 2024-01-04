@@ -382,10 +382,13 @@ require('lazy').setup({
 local greeter = require("alpha.themes.dashboard")
 greeter.section.header.opts = { position = 'center', hl = 'AlphaCol1' }
 greeter.section.header.val = {
-  [[     __       __             ____ ___ ]],
-  [[ ___/ /__ __ / /__ ___  ___ /_  /|_  |]],
-  [[/ _  // // //  '_// -_)/ _ \ / // __/ ]],
-  [[\___/ \___//_/\_\ \__//_//_//_//____/ ]],
+  [[  ___   _____      __     ]],
+  [[/' _ `\/\ '__`\  /'__`\   ]],
+  [[/\ \/\ \ \ \L\ \/\ \L\.\_ ]],
+  [[\ \_\ \_\ \ ,__/\ \__/.\_\]],
+  [[ \/_/\/_/\ \ \/  \/__/\/_/]],
+  [[          \ \_\           ]],
+  [[           \/_/           ]],
 }
 greeter.section.buttons.val = {
     greeter.button( "e",        "  New file" , ":ene <BAR> startinsert <CR>"),
