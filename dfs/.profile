@@ -27,3 +27,5 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 export GPG_TTY=$(tty)
+
+export QSYS_ROOTDIR="/home/npa/intelFPGA_lite/20.1/quartus/sopc_builder/bin"

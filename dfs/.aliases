@@ -42,7 +42,7 @@ else
     }
 fi
 
-alias rm='rm -vrI' # interactive
+alias rm='rm -vr' # interactive
 alias mv='mv -v' # interactive
 alias cat='cat -n' # with line numbers
 # [ -x /usr/bin/pygmentize ] && alias cat='pygmentize -g'

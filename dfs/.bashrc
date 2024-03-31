@@ -139,3 +139,5 @@ export EDITOR="$VISUAL"
 if [ -x /usr/bin/bat ]; then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
+
+export QSYS_ROOTDIR="/home/npa/intelFPGA_lite/20.1/quartus/sopc_builder/bin"
