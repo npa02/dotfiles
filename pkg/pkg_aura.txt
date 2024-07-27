@@ -4,5 +4,6 @@ aura-bin
 brave-bin
 pulseaudio-ctl
 upd72020x-fw
+visual-studio-code-bin
 wd719x-firmware
 xfce4-panel-profiles
