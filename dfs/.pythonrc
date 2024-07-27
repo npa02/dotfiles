@@ -1,0 +1,6 @@
+# ln -s ~/dotfiles/dfs/.pythonrc ~/.pythonrc
+
+from rich import print
+from rich import pretty
+pretty.install()
+

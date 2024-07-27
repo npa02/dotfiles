@@ -1,0 +1,11 @@
+[Trigger]
+Operation = Upgrade
+Operation = Install
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Backup package information post upgrade or install
+When = PostTransaction
+Exec = /usr/local/bin/pkg_backup.sh

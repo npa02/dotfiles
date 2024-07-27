@@ -1,0 +1,8 @@
+aic94xx-firmware
+ast-firmware
+aura-bin
+brave-bin
+pulseaudio-ctl
+upd72020x-fw
+wd719x-firmware
+xfce4-panel-profiles

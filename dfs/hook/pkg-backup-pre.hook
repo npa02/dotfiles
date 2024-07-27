@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Upgrade
+Operation = Install
+Type = Package
+Target = *
+
+[Action]
+Description = Backup package information pre upgrade or install
+When = PreTransaction
+Exec = /usr/local/bin/pkg_backup_pre.sh

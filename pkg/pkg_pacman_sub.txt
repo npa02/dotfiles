@@ -1,0 +1,9 @@
+accountsservice
+pulseaudio
+git
+noto-fonts-emoji
+npm
+ntfs-3g
+ueberzug
+ffmpegthumbnailer
+atool

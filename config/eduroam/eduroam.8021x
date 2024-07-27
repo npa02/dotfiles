@@ -1,0 +1,11 @@
+[Security]
+EAP-Method=PEAP
+EAP-Identity=wlan@tu-berlin.de
+EAP-PEAP-CACert=/var/lib/iwd/ca.pem
+EAP-PEAP-Phase2-Method=MSCHAPV2
+EAP-PEAP-Phase2-Identity=name@domain.name
+EAP-PEAP-Phase2-Password=password
+EAP-PEAP-ServerDomainMask=DNS_server
+
+[Settings]
+Autoconnect=true

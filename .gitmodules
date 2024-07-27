@@ -1,0 +1,16 @@
+; git submodule update --remote --merge
+[submodule ".config/ranger/plugins/ranger_devicons"]
+	path = .config/ranger/plugins/ranger_devicons
+	url = https://github.com/alexanderjeurissen/ranger_devicons
+[submodule "dfs/.zsh/zsh-autosuggestions"]
+	path = dfs/.zsh/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "dfs/.zsh/zsh-completions"]
+	path = dfs/.zsh/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions
+[submodule "dfs/.powerlevel10k"]
+	path = dfs/.powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git
+[submodule "dfs/fzf-tab"]
+	path = dfs/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab

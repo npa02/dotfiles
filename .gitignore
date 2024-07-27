@@ -1,0 +1,13 @@
+.vscode
+config/**/last_directory
+config/nvim/lazy-lock.json
+config/ranger/plugins/__pycache__
+config/.moc/playlist.m3u
+config/.moc/pid
+slack.desktop
+skypeforlinux.desktop
+*.protonvpn.udp.ovpn
+openvpn_pass*
+pkg*.new
+pkg*.old
+.nvimlog

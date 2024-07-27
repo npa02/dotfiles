@@ -1,0 +1,65 @@
+[credential]
+	helper = store
+
+[alias]
+	i = init
+	cl = clone
+	st = status
+	a = add
+	aa = add .
+	rst = restore
+	rs = reset
+	c = commit
+	ci = commit -m
+	cis = commit -S -m
+	ac = commit -am
+	acs = commit -S -am
+	ft = fetch
+	p = push
+	ps = push origin
+	pl = pull origin
+	mg = merge
+	br = branch
+	ba = branch -a
+	bd = branch -D
+	co = checkout
+	df = diff
+	sh = show
+	bl = blame
+	cfg = config
+	h = help
+	l = log
+
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+	ui = auto
+
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true    # use n and N to move between diff sections
+	light = false      # set to true if you're in a terminal with a light background color
+	side-by-side = true
+	line-numbers = true
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+[push]
+	autoSetupRemote = true
+[http]
+	postBuffer = 157286400
+[init]
+	defaultBranch = main
+[user]
+	email = npa0210@gmail.com
+	name = npa02

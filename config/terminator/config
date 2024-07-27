@@ -1,0 +1,36 @@
+[global_config]
+  borderless = True
+  inactive_color_offset = 0.72
+[keybindings]
+[profiles]
+  [[default]]
+    background_darkness = 0.72
+    background_type = transparent
+    font = JetBrainsMonoNL NF Light 13
+    foreground_color = "#ffffff"
+    show_titlebar = False
+    scrollbar_position = hidden
+    disable_mousewheel_zoom = True
+    use_system_font = False
+    bold_is_bright = True
+    copy_on_selection = True
+[layouts]
+  [[default]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 290:220
+      maximised = False
+      fullscreen = False
+      size = 1400, 720
+      title = /usr/bin/zsh
+      last_active_term = b1c6e44a-455a-4b02-818a-5bd8194495b8
+      last_active_window = True
+    [[[terminal1]]]
+      type = Terminal
+      parent = child0
+      order = 0
+      profile = default
+      uuid = b1c6e44a-455a-4b02-818a-5bd8194495b8
+[plugins]

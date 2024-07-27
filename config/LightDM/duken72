@@ -1,0 +1,8 @@
+[org.freedesktop.DisplayManager.AccountsService]
+BackgroundFile='/home/duken72/dotfiles/Wallpapers/synth-waterfall-4a-2560x1440.jpg'
+
+[User]
+Session=xfce
+XSession=xfce
+Icon=/var/lib/AccountsService/icons/duken72.png
+SystemAccount=false

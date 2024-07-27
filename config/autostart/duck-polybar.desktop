@@ -1,0 +1,23 @@
+[Desktop Entry]
+Categories=System;Monitor;
+Comment=
+Comment[en_US]=
+Exec=polybar --reload duck-mainbar
+GenericName=
+GenericName[en_US]=
+Icon=conky-logomark-violet
+MimeType=
+Name=polybar
+Name[en_US]=
+Path=/home/user/.config/polybar/
+StartupNotify=false
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+Hidden=false
+RunHook=0
+

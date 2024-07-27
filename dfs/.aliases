@@ -1,0 +1,289 @@
+export OS=$(echo $(grep -v _ID /etc/os-release | grep ID=) | cut -d'=' -f 2)
+# Overwrite existing commands for better defaults
+# enable color support for ls and grep
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    alias ldir='vdir'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+alias grepr='grep -R'
+
+# Replace ls with exa
+if [ -x /usr/bin/eza ]; then
+    export EZA_COLORS="uu=1;31:da=1;35"
+    alias  eza='eza --git --git-ignore --icons=always'
+    alias    l='eza'
+    alias   ls='eza'
+    alias   la='eza -a'
+    alias   ll='eza -l'
+    alias  lla='eza -la'
+    alias ldir='eza -lD'
+    alias   lt='eza --tree'
+    alias  lt1='eza -l --tree --level=1'
+    alias  lt2='eza -l --tree --level=2'
+    alias   cL='cl; eza'
+    function cd {
+        builtin cd "$@" && eza --git --git-ignore --icons
+    }
+else
+    alias    l='ls -C'
+    alias   la='ls -A'
+    alias   ll='ls -lh'
+    alias  lla='ls -Alh'
+    alias ldir="ls -lhF --color | grep --color=never '^d'"
+    alias   lt='tree'
+    alias  lt1='tree -L 1'
+    alias  lt2='tree -L 2'
+    alias   cL='cl; ls'
+    function cd {
+        builtin cd "$@" && ls -CA
+    }
+fi
+
+alias rm='rm -vr'
+alias mv='mv -v' # interactive
+alias cat='cat -n' # with line numbers
+# [ -x /usr/bin/pygmentize ] && alias cat='pygmentize -g'
+[ -x /usr/bin/bat ] && alias cat='bat'
+alias mkdir='mkdir -p'
+alias dirs='dirs -v'
+alias cp='cp -r' # recursive
+if [ -x /usr/bin/rsync ]; then
+    alias rsync='rsync -rahp --info=progress2'
+    #alias cp='rsync'
+fi
+alias less='less -N -R --use-color -DC+y -Du+b -DP+g -DN+y -DE+r'
+alias ip='ip -color=auto' # with colors
+alias dmesg='sudo dmesg -H --color=always' # with colors
+alias diff='diff --color=auto' # with colors
+alias zip='zip -er9' # encryption and recursive
+alias curl='curl --compressed'
+alias fd='fd --color always'
+alias find='fd'
+
+# -------------------------------------------------------- #
+# CD GENERIC
+alias c='cl; cd'
+alias -- -='cd -'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias .2='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+
+alias dfs='c ~/.dotfiles'
+alias dot='c ~/.dotfiles'
+alias pkg='c ~/.dotfiles/pkg'
+alias doc='c ~/Documents'
+alias dow='c ~/Downloads'
+alias mus='c ~/Music'
+alias pic='c ~/Pictures'
+alias vid='c ~/Videos'
+alias dev='c /dev'
+alias etc='c /etc'
+alias tmp='c /tmp'
+alias usr='c /usr'
+alias var='c /var'
+
+
+# -------------------------------------------------------- #
+# System
+# Memory
+alias df='df -h'
+alias duh='du -ahd 1'
+alias mem='ncdu --show-graph --show-percent --group-directories-first --show-itemcount'
+alias hist='history'
+alias cl='clear' # for terminator, just Ctrl+L
+alias rb='sudo shutdown -r now'
+alias sdn='sudo shutdown now'
+
+# dotfiles and config
+alias      ag='alias | grep'
+alias  ealias='v ~/.aliases && . ~/.aliases'
+alias ebashrc='v ~/.bashrc  && . ~/.bashrc'
+alias  ezshrc='v ~/.zshrc   && . ~/.zshrc'
+alias  talias='. ~/.aliases'
+alias tbashrc='. ~/.bashrc'
+alias  tzshrc='. ~/.zshrc'
+alias      cf='c ~/.dotfiles/config'
+alias     cfg='c ~/.config'
+alias polybar='polybar --reload duck-mainbar'
+# syncing with git
+alias dst='dfs && git status'
+alias dpl='dfs && git pull origin'
+function dps {    # dotfiles push
+    cd ~/.dotfiles
+    gaps "$1"
+}
+
+# -------------------------------------------------------- #
+# OS SPECIFIC
+
+# Arch Linux
+if [ $OS = 'arch' ]; then
+    # pacman - Package Manager
+    alias  pacs='sudo pacman -S --needed'
+    alias pacss='pacman -Ss'
+    alias  pacr='sudo pacman -R'
+    if [ -x /usr/bin/fzf ]; then
+        alias pacs="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S --needed"
+        alias pacu="sudo pacman -Sy && pacman -Qqu | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S --needed"
+        alias pacr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
+    fi
+    alias    pacsy='sudo pacman -Sy'
+    alias   pacsyu='sudo pacman -Syu'
+    alias     pacq='pacman -Q'
+    alias     pacg='pacman -Sg'
+
+    # AURA - AUR Helper
+    alias    auraa='sudo aura -Akax --needed'
+    alias    aurar='sudo aura -R'
+    alias   auraas='aura -As'
+    alias   auraau='sudo aura -Aukax'
+
+    # System cleaning
+    alias  orphans='pacman -Qtdq | sudo pacman -Rns -'
+    alias orphans2='pacman -Qqd | sudo pacman -Rsu -'
+    alias  cache_show='find ~/.cache/ -type f -atime +72'
+    alias cache_clean='find ~/.cache/ -type f -atime +72 -delete'
+fi
+
+# DUAL BOOT with WINDOWS
+if [ -d /media/${USERNAME}/Windows ]; then
+    alias unmountw='sudo umount ${WIN}'
+    alias mountw='unmountw; sudo mount.ntfs-3g /dev/nvme0n1p3 ${WIN}'
+fi
+
+
+# -------------------------------------------------------- #
+# Applications specific
+
+# Generic
+function o {
+    xdg-open "$1"
+    [[ "$1" == *".pdf" ]] && exit
+}
+alias of='o .'
+alias run='./run.sh'
+alias bt='bashtop'
+
+# TMUX
+function tmux_start_detach_session {
+    # $1 - session name
+    # $2 - command
+    tmux new -d -s "$1" "$2"
+}
+# https://github.com/sebastienrousseau/dotfiles/blob/master/lib/aliases/tmux/tmux.aliases.sh
+alias tm='tmux'                     # Start tmux
+alias tmn="tmux new-session"        # Start a new tmux session
+alias tmns='tmux new-session -s'    # Start a new tmux session with name
+alias tml='tmux list-sessions'      # List tmux sessions
+alias tma="tmux attach-session -t"  # Attach to a tmux session with name
+alias tmk='tmux kill-session -t'    # Kill tmux session with name
+
+# Mount
+alias usbg='echo "usbmount /dev/drive_name, drive_name from lsblk"'
+alias usbmount='udisksctl mount -b' # /dev/drive_name, drive_name from lsblk
+alias usbunmount='udisksctl unmount -b' # /dev/drive_name, drive_name from lsblk
+
+# Python
+alias py='python3'
+alias ipy='ipython3'
+function act {
+    for DIR in venv .venv; do
+        if [ -d "$DIR" ]; then
+            source "$DIR/bin/activate"
+            break
+        fi
+    done
+}
+alias deact='deactivate'
+
+# Editors
+# The first existing editor will be chosen by priority:
+# Neovim, Vim, Vi, VSCode
+for editor in nvim vim vi code; do
+  if type $editor &> /dev/null; then
+    alias v='$editor'
+    alias sv='sudo -E $editor'
+    break
+  fi
+done
+
+# Jupyter-notebook
+function jn {
+    tmux_start_detach_session jupyter "jupyter-notebook '$1'"
+}
+function jl {
+    tmux_start_detach_session jupyter "jupyter-lab '$1'"
+}
+
+# convert a file to pdf, at least work with pptx
+alias pdfConvert='soffice --headless --convert-to pdf'
+
+# Others
+function ra {
+    ranger $@
+    clear && ls
+}
+alias clock='tty-clock -sc -C 1 -f %A,%d-%b-%Y'
+
+# Utilities
+# alias rwifi='nmcli radio wifi off && nmcli radio wifi on'
+alias ibus-daemon-start='tmux new -d -s "ibus-daemon" "ibus-daemon"'
+function ibus-set-keyboard {
+    tmux has-session -t "ibus-daemon" 2>/dev/null
+    if [[ $? != 0 ]]; then
+        ibus-daemon-start
+    fi
+    ibus engine $1
+}
+alias vnk='ibus-set-keyboard Unikey'
+alias dek='ibus-set-keyboard xkb:de:nodeadkeys:deu'
+alias enk='ibus-set-keyboard xkb:us::eng'
+alias weather='curl wttr.in'
+alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python - --bytes'
+alias myip='dig +short txt ch whoami.cloudflare @1.0.0.1'
+
+# Alsa mixer
+alias usound='amixer -q -D pulse sset Master 14%+'
+alias dsound='amixer -q -D pulse sset Master 14%-'
+
+# Git
+alias    g='git'
+alias   gi='git init'
+alias  gcl='git clone'
+alias  gst='git status'
+alias   ga='git add'
+alias  gaa='git add .'
+alias grst='git restore'
+alias  grs='git reset'
+alias   gc='git commit'
+alias  gci='git commit -m'
+alias  gac='git commit -am'
+alias gcis='git commit -S -m'
+alias gacs='git commit -S -am'
+alias  gft='git fetch'
+alias  gps='git push origin'
+alias  gpl='git pull origin --prune'
+alias  gbr='git branch -a'
+alias  gbd='git branch -D'
+alias  gco='git checkout'
+alias  gdf='git diff'
+function gap {
+    gaa; gci "$1"; gps
+}
+function gaps {
+    gaa; gcis "$1"; gps
+}
+
+
+# -------------------------------------------------------- #
+# Workspaces
+alias    ws='c ~/WS'
