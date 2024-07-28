@@ -4,6 +4,7 @@
 
 - Check file `config/autostart/Natural-scrolling.desktop`
 - Configure `xinput`
+- The `id` of each input types and their properties change in each session, thus you have to use the orginal name.
 
 ## Change desktop wallpapers
 
