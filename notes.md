@@ -20,3 +20,7 @@
 ## Polybar
 
 - If you want to change the visual of the status bar above, change the config file `.dotfiles/config/polybar/config.ini`
+
+## Time synchronization
+
+`sudo timedatectl set-ntp true`
