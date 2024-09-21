@@ -14,3 +14,6 @@
 [submodule "dfs/fzf-tab"]
 	path = dfs/fzf-tab
 	url = https://github.com/Aloxaf/fzf-tab
+[submodule "config/polybar/polybar-scripts/polybar-bluetooth"]
+	path = config/polybar/polybar-scripts/polybar-bluetooth
+	url = https://github.com/msaitz/polybar-bluetooth.git

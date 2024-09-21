@@ -1,15 +1,13 @@
 adobe-source-han-sans-otc-fonts
 alsa-utils
 base
-base-devel
 bashtop
-bat
 bind
+blueberry
 bluez-utils
 docx2txt
 eog
 eza
-fd
 fzf
 git-delta
 go
@@ -18,7 +16,6 @@ hunspell-en_us
 ibus-unikey
 inetutils
 intel-ucode
-intltool
 jupyter-notebook
 libratbag
 libreoffice-fresh
@@ -44,11 +41,9 @@ polybar
 ranger
 redshift
 reflector
-ripgrep
 rofi
 sd
 shfmt
-sndio
 sof-firmware
 sxhkd
 terminator
@@ -61,3 +56,4 @@ wireshark-qt
 wmctrl
 xdg-user-dirs
 xf86-video-intel
+zathura
